@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html lang="en-US" class="">
+<head>
+    <meta charset="utf-8">
+   
+    <jcms:site:seotitle/>
+
+    <!-- Fevicon -->
+    <jcms:site:fevicon/>
+
+    <!-- Begin Stylesheets -->
+    <link rel="stylesheet" href="includes/flaticons/icons.css" type="text/css">
+    <link rel="stylesheet" href="includes/fontawesome/icons.css" type="text/css">
+    <link rel="stylesheet" href="css/reset.css" type="text/css">
+    <link rel="stylesheet" href="js/swiper/swiper.css" type="text/css">
+    <link rel="stylesheet" href="js/magnific-popup/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="css/animate.css" type="text/css">
+    <link rel="stylesheet" href="css/styles.css" type="text/css">
+    <!-- End Stylesheets -->
+    <style>
+        #contactform iframe{
+            height:auto !important;
+            pointer-events: visible !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Begin Header -->
+    <jcms:module:header2/>
+    <!-- End Header -->
+
+    <main>
+     <jcms:module:contact-us/>
+
+    </main>
+    <!-- End Main -->
+<!-- footer -->
+<jcms:module:footers/>
+<!-- footer end -->
+
+    <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/modernizr.js"></script>
+    <script src="js/easing.js"></script>
+    <script src="js/imagesloaded.js"></script>
+    <script src="js/waypoints.js"></script>
+    <script src="js/swiper/swiper.js"></script>
+    <script src="js/magnific-popup/magnific-popup.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js' async defer></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#contactform').validate({
+                errorElement: 'span',
+                errorClass: 'validate-has-error',
+                rules: {
+                    name: {required: true},
+                    phone: {required: true},
+                    email: {required: true, email: true},
+                    message: {required: true}
+                },
+                messages: {
+                    name: {required: "Please enter your Name."},
+                    phone: {required: "Please enter your Phone Number."},
+                    email: {required: "Please enter your Email Address."},
+                    message: {required: "Please enter your Message."}
+                },
+                submitHandler: function (form) {
+                    var recaptcha = $("#g-recaptcha-response").val();
+                if (recaptcha === "") {
+                    event.preventDefault();
+                    alert("Please check the recaptcha");
+                    return false;
+                }
+                    var Frmval = $("form#contactform").serialize();
+                    $("input#submit").attr("disabled", "true").val('Processing...');
+                    $.ajax({
+                        type: "POST",
+                        dataType: "JSON",
+                        url: "enquery_mail.php",
+                        data: "action=forContact&" + Frmval,
+                        success: function (data) {
+                            var msg = eval(data);
+                            $("input#submit").removeAttr("disabled").val('Submit');
+                            $('div#result_msg').html(msg.message).css('display', 'block').fadeOut(8000);
+                            $("form#contactform")[0].reset();
+                        }
+                    });
+                    return false;
+                }
+            })
+        });
+    </script>
+</body>
+</html>

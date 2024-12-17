@@ -1,0 +1,654 @@
+<!DOCTYPE HTML>
+<html lang="en-US" class="">
+<head>
+    <meta charset="utf-8">
+   
+    <jcms:site:seotitle/>
+
+    <!-- Fevicon -->
+    <jcms:site:fevicon/>
+
+    <!-- Begin Stylesheets -->
+    <link rel="stylesheet" href="includes/flaticons/icons.css" type="text/css">
+    <link rel="stylesheet" href="includes/fontawesome/icons.css" type="text/css">
+    <link rel="stylesheet" href="css/reset.css" type="text/css">
+    <link rel="stylesheet" href="js/swiper/swiper.css" type="text/css">
+    <link rel="stylesheet" href="js/magnific-popup/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="css/animate.css" type="text/css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="css/styles.css" type="text/css">
+    <link rel="stylesheet" href='https://unpkg.com/swiper/swiper-bundle.min.css'>
+    <!-- End Stylesheets -->
+</head>
+<style>
+    #popup-popup-video {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.65);
+        backdrop-filter: blur(5px);
+        z-index: 99999;
+    }
+
+    #popup-popup-video .popup-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 5px;
+    }
+
+    #popup-popup-video .popup-swiper-container {
+        width: 58vh;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    #popup-popup-video .swiper-slide {
+        text-align: center;
+        font-size: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #popup-popup-video .swiper-slide iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        transform: scale(0.9);
+    }
+
+    #popup-popup-video .close-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 2.5rem;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        z-index: 10;
+        color: rgba(255, 255, 255, 1);
+    }
+
+    #popup-popup-video .swiper-button-next,
+    #popup-popup-video .swiper-button-prev {
+        color: rgba(255, 255, 255, 1);
+        transform: scale(0.45);
+    }
+
+    #popup-popup-video .swiper-button-next {
+        right: -20px;
+    }
+
+    #popup-popup-video .swiper-button-prev {
+        left: -20px;
+    }
+
+    #popup-popup-video .swiper-button-next:hover,
+    #popup-popup-video .swiper-button-prev:hover {
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    #popup-popup-image {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.65);
+        backdrop-filter: blur(5px);
+        z-index: 99999;
+    }
+
+    #popup-popup-image .popup-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 5px;
+    }
+
+    #popup-popup-image .popup-swiper-container {
+       width: 72vh;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    #popup-popup-image .swiper-slide {
+        text-align: center;
+        font-size: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #popup-popup-image .swiper-slide img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    #popup-popup-image .popup-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .close-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 2.5rem;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        z-index: 10;
+        color: rgba(255, 255, 255, 1);
+    }
+
+    #popup-popup-video .swiper-button-next,
+    #popup-popup-video .swiper-button-prev {
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.5rem !important;
+        transform: scale(0.5);
+        padding: 1.5rem;
+    }
+
+    #popup-popup-video .swiper-button-next {
+        right: -50px;
+    }
+
+    #popup-popup-video .swiper-button-prev {
+        left: -50px;
+    }
+
+    #popup-popup-image .swiper-button-next,
+    #popup-popup-image .swiper-button-prev {
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.5rem !important;
+        transform: scale(0.5);
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 1.5rem;
+    }
+
+    #popup-popup-video .swiper-button-next:hover,
+    #popup-popup-video .swiper-button-prev:hover,
+    #popup-popup-image .swiper-button-next:hover,
+    #popup-popup-image .swiper-button-prev:hover {
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    #popup-popup-video .swiper-pagination,
+    #popup-popup-image .swiper-pagination {
+        transform: translateY(10px);
+    }
+</style>
+
+<body>
+    <!-- Begin Header -->
+<jcms:module:header2/>
+    <!-- End Header -->
+
+    <!-- Begin Main -->
+    <main>
+        <section class="fullscreen">
+            <div class="carousel-slider style-intro" data-allow-mousewheel="false">
+                <div class="swiper-container" id="intro-slider-1">       
+                    <div class="swiper-wrapper">
+                        <jcms:module:slideshow/>
+                    </div>
+                    <!-- Add Pagination -->
+                	<div class="swiper-pagination"></div>
+                	<div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <!--<p class="swiper-nav-prev">Prev</p>-->
+                    <!--<p class="swiper-nav-next">Next</p>-->
+                </div>
+            </div>
+        </section>
+        
+        <!-- booking now -->
+        <jcms:module:booking_new/>
+        <!-- booking now end -->
+
+        <!-- homepage articles -->
+        <section class="welcome-section">
+            <jcms:module:homearticle/>
+            <!-- homepage articles end -->
+            <div class="row no-space animate__animated" data-animation-type="animate__fadeIn" data-animation-delay="0">
+                <div class="section-wrapper-boxed clearfix">
+                    <jcms:module:home-pages_Services/>
+                </div>
+            </div>
+        </section>
+
+        <!--<section class="video-popup-wrapper has-background" style="background-image:url('images/video-2.jpg');">-->
+        <!--    <div class="popup-button">-->
+        <!--        <a href="#" class="icon-fa-play" data-video-url="https://www.youtube.com/watch?v=Vxt4C9aPZ9A?autoplay=0"></a>-->
+        <!--    </div>-->
+        <!--</section>-->
+        <!-- <section class="video-wrapper">
+            <div class="popup-button">
+                <iframe src='https://www.youtube.com/embed/Vxt4C9aPZ9A?rel=0&amp;autoplay=1&amp;mute=1&amp;controls=0&amp;loop=1&playlist=Vxt4C9aPZ9A' title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+            </div>
+        </section> -->
+        <style>
+            .video__wrapper video{
+                width: 100%;
+                height: auto;
+            }
+            </style>
+        <section class="video__wrapper">
+            <video autoplay loop muted playsinline defaultmuted preload="auto">
+              <source src="images/video/hotelgoodwill.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+              </video>
+      
+
+        <section>
+            <div class="row space">
+                <div class="column full textcenter">
+                    <div class="section-wrapper-boxed">     
+                        <div class="big-title">
+                            <p class="subtitle style-border-left-right color-accent">Discover Our Best Offers</p>
+                            <h1 class="style-low-margin">Our Accommodations</h1>
+                        </div>
+                        <div class="divider70"></div>
+                    </div>
+                    <div class="carousel-slider style-horizontal-focused height-limited animate__animated" data-animation-type="animate__fadeIn" data-animation-delay="0" data-allow-mousewheel="false">
+                        <div class="swiper-container" id="rooms-slider-1">
+                            <div class="swiper-wrapper">
+                                <jcms:module:home-accommodation/>
+                            </div>
+
+                            <div class="swiper-pagination"></div>
+                            <!-- Add Pagination -->
+                        	<div class="swiper-pagination"></div>
+                        	<div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+
+                            <!--<p class="swiper-nav-prev">Prev</p>-->
+                            <!--<p class="swiper-nav-next">Next</p>-->
+                        </div>
+                    </div>
+                    
+                    <div class="divider100"></div>
+
+                    <div class="section-wrapper-boxed textcenter">
+                        <h3>We offer a variety of room layouts to meet the needs of our customers.<br/> Our aim is to provide you with a comfortable sleeping habitat at a fair and reasonable price.</h3>
+
+                        <div class="divider10"></div>
+
+                        <a href="rooms-suites" class="button large standard accent no-margin-right">Check All Rooms</a>   
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="no-padding">
+            <div class="row no-space clearfix">
+                <div class="column one-third">
+                    <a href="hall" class="image-box style-title-over animate__animated" data-animation-type="animate__fadeIn" data-animation-delay="0">
+                        <div class="media">
+                            <div class="inner-media">
+                                <img src="images/hall/corporate.jpg" alt="">
+                            </div>
+                        </div>
+
+                        <span class="label">Corporate</span>
+                        <p class="hall-text">Corporate meeting requires careful attention to detail<br> to ensure a productive and successful event.</p>
+                        <span class="discover">Discover more</span>
+                    </a>
+                </div>
+
+                <div class="column one-third dark-grey-background animate__animated" data-animation-type="animate__fadeIn" data-animation-delay="100">
+                    <div class="title-box">
+                        <div class="box-content">
+                            <h3>We provide outstanding and sensible<br/> services to create a memorable experience for your special event.</h3>
+
+                            <div class="divider10"></div>
+                            <a href="hall" class="button medium outline accent no-margin">Our Halls</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column one-third animate__animated" data-animation-type="animate__fadeIn" data-animation-delay="200">
+                    <a href="hall" class="image-box style-title-over">
+                        <div class="media">
+                            <div class="inner-media">
+                                <img src="images/hall/wedding.jpg" alt="">
+                            </div>
+                        </div>
+
+                        <span class="label">Wedding</span>
+                        <p class="hall-text">Planning a wedding is an exciting journey, and <br>choosing the right wedding hall is a crucial.</p>
+                        <span class="discover">Discover more</span>
+                    </a>
+                </div>
+
+                <div class="column one-third animate__animated" data-animation-type="animate__fadeIn" data-animation-delay="300">
+                    <a href="hall" class="image-box style-title-over">
+                        <div class="media">
+                            <div class="inner-media">
+                                <img src="images/hall/workshop.jpg" alt="">
+                            </div>
+                        </div>
+
+                        <span class="label">Workshop</span>
+                        <p class="hall-text">Selecting the right workshop hall is crucial <br>for ensuring a productive and engaging event. </p>
+                        <span class="discover">Discover more</span>
+                    </a>
+                </div>
+
+                <div class="column one-third animate__animated" data-animation-type="animate__fadeIn" data-animation-delay="400">
+                    <a href="hall" class="image-box style-title-over">
+                        <div class="media">
+                            <div class="inner-media">
+                                <img src="images/hall/seminar.jpg" alt="">
+                            </div>
+                        </div>
+
+                        <span class="label">Seminar</span>
+                        <p class="hall-text">Organizing a seminar requires careful planning <br>and attention to detail.</p>
+                        <span class="discover">Discover more</span>
+                    </a>
+                </div>
+
+                <div class="column one-third animate__animated" data-animation-type="animate__fadeIn" data-animation-delay="500">
+                    <a href="hall" class="image-box style-title-over">
+                        <div class="media">
+                            <div class="inner-media">
+                                <img src="images/hall/meeting.jpg" alt="">
+                            </div>
+                        </div>
+
+                        <span class="label">Meeting</span>
+                        <p class="hall-text">Planning a meeting involves alot steps to ensure<br> it runs smoothly and achieves its objectives. </p>
+                        <span class="discover">Discover more</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+
+        <section>
+            <div class="row space clearfix">
+                <div class="column full">
+                    <div class="section-wrapper-boxed ">
+                        <div class="big-title" style="text-align:center;">
+                            <p class="subtitle style-border-left-right color-accent">Surrender to bright joy, pure bliss and sensory pleasure</p>
+                            <h1 class="style-low-margin">Wellness & Relaxation Facilities</h1>
+                        </div>
+
+                        <p style="text-align:center;">Revitalize your senses, restore your balance, and enhance your well-being at our ever-evoloving spa and <br/>wellness center. Forget the weather, stress, fatigue, and treat yourself.</p>
+
+                        <div class="divider70"></div>
+                            <jcms:module:home_page_2 />
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- near location -->
+        <div class="big-title" style="text-align:center;">
+            <p class="subtitle style-border-left-right color-accent">Discover Our local Attractions</p>
+            <h1 class="style-low-margin">Nearby Local Attractions</h1>
+        </div>
+
+        <section class="slider-sliced-wrapper">
+            <div class="sliced-slider section-wrapper-boxed  overflow--hidden">
+                <div class="sliced-slider-images">
+                    <div class="wrapper">
+                        <jcms:module:nearrby-img/>
+                    </div>
+                </div>
+
+                <div class="sliced-container nearby-slider">
+                    <div class="swiper-container" id="sliced-slider-1">
+                        <div class="swiper-wrapper">
+                            <jcms:module:inner-nearrby-detail/>
+                        </div>
+                    </div>
+
+                    <p class="custom-pagination" style="display: block; position: absolute; bottom: 11%;">
+                        <span class="current-index"></span>
+                        <span class="total"></span>
+                    </p>
+                    
+                    <!-- Add Pagination -->
+                	<div class="swiper-pagination"></div>
+                	<div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+
+                    <!--<p class="swiper-nav-prev">Prev</p>-->
+                    <!--<p class="swiper-nav-next">Next</p>-->
+                </div>
+            </div>
+        </section>
+        <!-- near location end -->
+
+        <section class="testimonials has-background" style="background-image:url('<jcms:module:testimonial_img/>');">
+            <div class="row space clearfix">
+                <div class="column full">
+                    <div class="section-wrapper-boxed textcenter">
+                        <div class="big-title">
+                            <p class="subtitle style-border-left-right color-accent">Customer satisfaction is in our core values as a team</p>
+                            <h1 class="style-low-margin">Our Guest's Review</h1>
+                        </div>
+
+                        <div class="divider70 hide-on-mobile"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-slider testimonials-slider" data-allow-mousewheel="false">
+                <div class="swiper-container" id="testimonials-slider-1">
+                    <jcms:module:testiSlider/>
+                    
+                    <!-- Add Pagination -->
+                	<div class="swiper-pagination"></div>
+                	<div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+
+                    <!--<p class="swiper-nav-prev">Prev</p>-->
+                    <!--<p class="swiper-nav-next">Next</p>-->
+                </div>
+            </div>
+            <div class="divider80"></div>
+        </section>
+    </main>
+    <!-- End Main -->
+<jcms:module:footers/>
+<jcms:module:popup/>
+    <!--<script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>-->
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/modernizr.js"></script>
+    <script src="js/easing.js"></script>
+    <script src="js/imagesloaded.js"></script>
+    <script src="js/waypoints.js"></script>
+    <script src="js/swiper/swiper.js"></script>
+    <script src="js/magnific-popup/magnific-popup.js"></script>
+    <script src="js/scripts.js"></script>
+    <!-- <script src='https://unpkg.com/swiper/swiper-bundle.min.js'></script> -->
+       <script>
+        // function setMinDate() {
+        //     // Get current date
+        //     var today = new Date().toISOString().split('T')[0];
+            
+        //     // Set min attribute of date inputs
+        //     document.getElementById('checkin').setAttribute('min', today);
+        //     document.getElementById('checkout').setAttribute('min', today);
+        // }
+
+        // // Call setMinDate() when the page loads
+        // window.onload = function() {
+        //     setMinDate();
+            
+        //     // Set default values for date inputs
+        //     var currentDate = new Date();
+        //     var nextDate = new Date(currentDate.getTime() + 24 * 60 * 60 * 1000);
+        //     document.getElementById('checkin').valueAsDate = currentDate;
+        //     document.getElementById('checkout').valueAsDate = nextDate;
+        // };
+
+        // // Call setMinDate() when the user interacts with the form
+        // document.getElementById('checkin').addEventListener('input', setMinDate);
+        // document.getElementById('checkout').addEventListener('input', setMinDate);
+        
+        // document.getElementById('submitButton').addEventListener('click', function(e) {
+        //     e.preventDefault(); // Prevent the default behavior of the link
+        
+        //     // Get the form element
+        //     var form = document.getElementById('bookingform');
+        
+        //     // Submit the form
+        //     form.submit();
+        // });
+    </script>
+    <!--<script>
+        // Get current date and next date
+        var currentDate = new Date();
+        var nextDate = new Date();
+        nextDate.setDate(currentDate.getDate() + 1);
+
+        // Format dates as YYYY-MM-DD
+        var currentDateString = currentDate.toISOString().slice(0, 10);
+        var nextDateString = nextDate.toISOString().slice(0, 10);
+
+        // Set default values for date inputs
+        document.getElementById('checkin').value = currentDateString;
+        document.getElementById('checkout').value = nextDateString;
+
+        // Prevent selection of previous dates
+        var today = new Date().toISOString().split('T')[0];
+        document.getElementsByName("checkin")[0].setAttribute('min', today);
+        document.getElementsByName("checkout")[0].setAttribute('min', today);
+//     </script>-->
+
+    <script>
+        $(function () {
+            $("#checkin").datepicker({
+                dateFormat: 'yy-mm-dd',
+                minDate: 'dateToday',
+                onSelect: function (dateText) {
+                    var nextDay = new Date(dateText);
+                    nextDay.setDate(nextDay.getDate() + 1);
+                    $("#checkout").datepicker().datepicker("setDate", nextDay);
+                    $("#checkout").datepicker().datepicker('option', 'minDate', nextDay);
+                }
+            }).datepicker("setDate", new Date());
+        
+            $("#checkout").datepicker({
+                dateFormat: 'yy-mm-dd',
+                minDate: 'today' + 1,
+            }).datepicker("setDate", new Date());
+            
+            $('#submitButton').on('click',function(){
+                $('#bookingform').submit();
+            })
+        });
+    </script>
+     <!--Static popup-->
+
+<style>
+      #popup-popup-image {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(5px);
+            z-index: 99999;
+        }
+
+        #popup-popup-image .popup-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 5px;
+        }
+        #popup-popup-image .popup-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 2.5rem;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 10;
+            color: rgba(255, 255, 255, 1);
+        }
+</style>
+<script>
+    var videoPopup = document.getElementById('popup-popup-video');
+    var imagePopup = document.getElementById('popup-popup-image');
+    var videoSwiper;
+    var imageSwiper;
+    
+
+    window.onload = function () {
+        if(videoPopup){
+            videoSwiper = new Swiper('#popup-popup-video .popup-swiper-container', {
+                loop: true,
+                autoplay: false,
+                navigation: {
+                    nextEl: '#popup-popup-video .swiper-button-next',
+                    prevEl: '#popup-popup-video .swiper-button-prev',
+                },
+                pagination: {
+                    el: '#popup-popup-video .swiper-pagination',
+                },
+            });
+            videoPopup.style.display = 'block';
+    
+        }
+        else{
+            openImagePopup();
+        }
+        
+    }
+
+    function closeVideoPopup() {
+        videoPopup.style.display = 'none';
+        openImagePopup();
+    }
+
+    function openImagePopup() {
+        imagePopup.style.display = 'block';
+        imageSwiper = new Swiper('#popup-popup-image .popup-swiper-container', {
+            loop: true,
+            autoplay: false,
+            navigation: {
+                nextEl: '#popup-popup-image .swiper-button-next',
+                prevEl: '#popup-popup-image .swiper-button-prev',
+            },
+            pagination: {
+                el: '#popup-popup-image .swiper-pagination',
+            },
+        });
+    }
+
+    function closeImagePopup() {
+        imagePopup.style.display = 'none';
+    }
+
+
+  
+</script>
+
+</body>
+</html>
